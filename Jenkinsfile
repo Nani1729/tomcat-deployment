@@ -1,5 +1,9 @@
 pipeline {
   agent any
+  environment {
+    DOCKER_IMAGE_NAME = 'manojreddy12/newrepo'
+    DOCKER_VERSION = 'v2.0'
+  }
   stages {
     stage('java') {
       steps {
@@ -18,7 +22,12 @@ pipeline {
     }
     stage('DockerBuild') {
       steps {
-        sh 'docker build -t manojreddy12/newrepo:v1.0 .'
+        sh 'docker build -t $DOCKER_IMAGE_NAME:$DOCKER_VERSION .'
+      }
+    }
+    stage('DockerPush') {
+      steps {
+        sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION' 
       }
     }
   }
