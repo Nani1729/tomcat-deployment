@@ -29,6 +29,7 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'swaroop', usernameVariable: 'manoj')]) {
     sh 'docker login --username $manoj --password $swaroop'
+          sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
 }
          
       }
