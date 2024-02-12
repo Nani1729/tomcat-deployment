@@ -27,7 +27,10 @@ pipeline {
     }
     stage('DockerPush') {
       steps {
-        sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION' 
+        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'swaroop', usernameVariable: 'manoj')]) {
+    sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
+}
+         
       }
     }
   }
