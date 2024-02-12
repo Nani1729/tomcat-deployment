@@ -16,9 +16,9 @@ pipeline {
         sh 'mvn package'
       }
     }
-    stage('Deploy') {
+    stage('DockerBuild') {
       steps {
-        deploy adapters: [tomcat9(credentialsId: 'tomcat-9', path: '', url: 'http://54.175.202.133:8085')], contextPath: 'demo', war: '**/*.war'
+        sh 'docker build -t manojreddy12/newrepo:v1.0 .
       }
     }
   }
