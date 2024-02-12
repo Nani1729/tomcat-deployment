@@ -31,11 +31,12 @@ pipeline {
     sh 'docker login --username $manoj --password $swaroop'
           sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
 }
+      }
+    }
         stage('runDockerContainer') {
           steps {
             sh 'docker run -itd -p 9000:8080 --name manoj $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
-         
-      }
-    }
+          }
+        }
   }
 }
