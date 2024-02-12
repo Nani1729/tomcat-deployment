@@ -18,7 +18,7 @@ pipeline {
     }
     stage('DockerBuild') {
       steps {
-        sh 'docker build -t manojreddy12/newrepo:v1.0 .
+        sh 'docker build -t manojreddy12/newrepo:v1.0 .'
       }
     }
   }
