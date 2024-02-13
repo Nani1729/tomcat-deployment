@@ -30,5 +30,10 @@ pipeline {
          sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 124939912975.dkr.ecr.us-east-1.amazonaws.com'
       }
     }
+    stage('EcrPush') {
+      steps {
+         sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
+      }
+    }
   }
 }
