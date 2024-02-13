@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    DOCKER_IMAGE_NAME = 'manojreddy12/newrepo'
+    DOCKER_IMAGE_NAME = '124939912975.dkr.ecr.us-east-1.amazonaws.com/docker'
     DOCKER_VERSION = 'v2.0'
   }
   stages {
@@ -25,18 +25,10 @@ pipeline {
         sh 'docker build -t $DOCKER_IMAGE_NAME:$DOCKER_VERSION .'
       }
     }
-    stage('DockerPush') {
+    stage('EcrLogin') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'swaroop', usernameVariable: 'manoj')]) {
-    sh 'docker login --username $manoj --password $swaroop'
-          sh 'docker push $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
-}
+         sh 'aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 124939912975.dkr.ecr.us-east-1.amazonaws.com'
       }
     }
-        stage('runDockerContainer') {
-          steps {
-            sh 'docker run -itd -p 9000:8080 --name manoj $DOCKER_IMAGE_NAME:$DOCKER_VERSION'
-          }
-        }
   }
 }
