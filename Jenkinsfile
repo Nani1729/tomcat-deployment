@@ -1,6 +1,8 @@
 pipeline {
   agent {
+    docker {
     image 'manoj:v2.0'
+  }
   }
   
   stages {
