@@ -6,8 +6,9 @@ pipeline {
   }
   
   stages {
-    stage('java') {
-       parallel {
+    stage('Parallel Stage') {
+    parallel {
+    stage('java') { 
       steps {
         sh 'java -version'
       }
@@ -16,6 +17,7 @@ pipeline {
       steps {
         sh 'mvn clean'
       }
+    }
     }
     }
     stage('build') {
